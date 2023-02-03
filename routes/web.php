@@ -34,4 +34,6 @@ Route::get('/', function () {
 });
 
 //Route to get to register page with action 'create'
-Route::get('register', [RegisterController::class, 'create']);
+Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
+//Post request with action 'store' to store the user
+Route::post('register', [RegisterController::class, 'store'])->middleware('guest'); //middleware is used to read the request and perform logic on it

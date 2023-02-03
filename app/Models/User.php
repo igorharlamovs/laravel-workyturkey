@@ -16,11 +16,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -40,6 +36,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //Eloquent mutator, whenever a certain field is set, i want to first pipe it through this function
+    public function setPasswordAttribute($password){
+        $this->attributes['password'] = bcrypt($password);
+    }
 
     public function posts()
     {
