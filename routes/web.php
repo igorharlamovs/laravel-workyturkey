@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\RegisterController;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
@@ -29,5 +30,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', function () {
-    return view('homepage');
+    return view('loginpageuser');
 });
+
+//Route to get to register page with action 'create'
+Route::get('register', [RegisterController::class, 'create']);
