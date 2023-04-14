@@ -18,6 +18,9 @@ class User extends Authenticatable
      */
     protected $guarded = [];
 
+    //Default timestamps
+    public $timestamps = true;
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -42,8 +45,28 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($password);
     }
 
-    public function posts()
+    public function userType()
     {
-        return $this->hasMany(Post::class);
+        return $this->belongsTo(UserType::class, "user_type_id");
+    }
+
+    public function workouts()
+    {
+        return $this->hasMany(Workout::class);
+    }
+
+    public function workout_plans()
+    {
+        return $this->hasMany(WorkoutPlan::class);
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
+    public function message_threads()
+    {
+        return $this->hasMany(MessageThread::class);
     }
 }
