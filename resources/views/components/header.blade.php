@@ -1,25 +1,58 @@
-<nav class="md:flex md:justify-between md:items-center">
-    <div>
-        <a href="/register">
-        </a>
-    </div>
+<script>
+    $(document).ready(function() {
+      $('.dropdown').click(function(e) {
+        e.stopPropagation();
+        $(this).toggleClass('active');
+        $(this).find('.dropdown-menu').toggleClass('hidden');
+      });
+    
+      $(document).click(function() {
+        $('.dropdown').removeClass('active');
+        $('.dropdown-menu').addClass('hidden');
+      });
+    });
+</script>
 
-    <div class="mt-8 md:mt-0 flex items-center">
+<header class="bg-white shadow-lg">
+    <div class="container mx-auto px-4 py-6 flex items-center justify-between">
+        <a href="#"><h1 class="text-blue-500 text-xl font-bold">Workout Scheduler</h1></a>
+      <nav>
         @auth
-            <span class="text-xs font-bold uppercase">Welcome, {{ auth()->user()->name }}</span>
-
-            <a href="/createplans" class="ml-6 text-xs font-bold uppercase text-colour-blue">Create Plan</a>
-            <a href="/plans" class="ml-6 text-xs font-bold uppercase text-colour-blue">Plans</a>
-            <a href="/contacts" class="ml-6 text-xs font-bold uppercase text-colour-blue">Contacts</a>
-
-            <form method="POST" action="/logout" class="text-xs font-semibold text-blue-500 ml-6">
+        <ul class="flex space-x-6">
+          <li>
+            <span class="text-gray-600 hover:text-gray-800">Welcome, {{ auth()->user()->name }}</span>
+          </li>
+          <li>
+            <div class="dropdown inline-block relative">
+                <button class="text-gray-600 hover:text-gray-800 inline-flex items-center">
+                  <span>Plans</span>
+                </button>
+                <ul class="dropdown-menu absolute hidden text-gray-700 pt-1">
+                  <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="/plans">Plans List</a></li>
+                  <li><a class="rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="/createplan">Create Plan</a></li>
+                </ul>
+              </div>
+          </li>
+          <li>
+            <a href="/contacts" class="text-gray-600 hover:text-gray-800">Contacts</a>
+          </li>
+          <li>
+            <form method="POST" action="/logout" class="text-red-600 hover:text-gray-800">
                 @csrf
                 <button type="submit">Log Out</button>
             </form>
-
+          </li>
+        </ul>
         @else
-            <a href="/register" class="text-xs font-bold uppercase text-colour-blue">Register</a>
-            <a href="/login" class="ml-6 text-xs font-bold uppercase">Login</a>
+        <ul>
+            <li>
+                <a href="/register" class="text-gray-600 hover:text-gray-800">Register</a>
+            </li>
+            <li>
+                <a href="/login" class="text-gray-600 hover:text-gray-800">Login</a>
+            </li>
+        </ul>
         @endauth
+      </nav>
     </div>
-</nav>
+  </header>
