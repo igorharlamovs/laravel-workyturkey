@@ -19,6 +19,7 @@
     "dependencies": {
         "alpinejs": "^3.10.5",
         "css": "^3.0.0",
+        "jquery": "^3.6.4",
         "tailwind": "^4.0.0"
     }
 }
